@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cytzero - Professional Hacking Solutions</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://cdnjs.cloudflare.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#000000">
+    <title>Cytzero 2025 - Next-Gen Security Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -32,26 +40,39 @@
             z-index: 1;
         }
 
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             padding: 1rem 2rem;
             z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #ff0000;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
         .nav-links {
@@ -62,11 +83,24 @@
         .nav-links a {
             color: #ffffff;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
         }
 
-        .nav-links a:hover {
-            color: #ff0000;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff0000;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .hero {
@@ -81,7 +115,7 @@
         }
 
         .title {
-            font-size: 5rem;
+            font-size: 6rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 4px;
@@ -89,15 +123,20 @@
             z-index: 2;
             text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
             animation: glow 2s ease-in-out infinite alternate;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-top: 1rem;
             color: #ff0000;
             position: relative;
             z-index: 2;
             opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .accent-line {
@@ -107,13 +146,14 @@
             margin: 2rem 0;
             position: relative;
             z-index: 2;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
         .cta-button {
             background: transparent;
             border: 2px solid #ff0000;
             color: #ff0000;
-            padding: 1rem 2rem;
+            padding: 1.2rem 3rem;
             font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s;
@@ -122,15 +162,32 @@
             margin-top: 2rem;
             position: relative;
             z-index: 2;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
             background: #ff0000;
             color: #000000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
         }
 
         .services {
-            padding: 5rem 2rem;
+            padding: 8rem 2rem;
             position: relative;
             z-index: 2;
             background: rgba(0, 0, 0, 0.8);
@@ -147,54 +204,78 @@
 
         .service-card {
             background: rgba(255, 0, 0, 0.1);
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 2.5rem;
+            border-radius: 15px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .service-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.5);
         }
 
         .service-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: #ff0000;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
         .service-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
             color: #ff0000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .service-description {
             color: #ffffff;
-            line-height: 1.6;
+            line-height: 1.8;
+            font-size: 1.1rem;
         }
 
         footer {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 2rem;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 3rem;
             text-align: center;
             position: relative;
             z-index: 2;
+            backdrop-filter: blur(10px);
         }
 
         .social-links {
-            margin: 1rem 0;
+            margin: 2rem 0;
         }
 
         .social-links a {
             color: #ffffff;
-            font-size: 1.5rem;
-            margin: 0 1rem;
-            transition: color 0.3s;
+            font-size: 1.8rem;
+            margin: 0 1.5rem;
+            transition: all 0.3s;
+            display: inline-block;
         }
 
         .social-links a:hover {
             color: #ff0000;
+            transform: translateY(-5px);
+        }
+
+        .year-badge {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 0, 0, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ff0000;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
         }
 
         @keyframes glow {
@@ -212,6 +293,9 @@
     </style>
 </head>
 <body>
+    <div class="matrix-bg"></div>
+    <div class="year-badge">2025</div>
+
     <nav>
         <a href="#" class="logo">Cytzero</a>
         <div class="nav-links">
@@ -226,7 +310,7 @@
         <h1 class="title">Cytzero</h1>
         <div class="accent-line"></div>
         <p class="subtitle">Hackers</p>
-        <button class="cta-button">Get Started</button>
+        <button class="cta-button">Initialize System</button>
     </section>
 
     <section id="services" class="services">
@@ -255,7 +339,7 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
             <a href="#"><i class="fab fa-linkedin"></i></a>
         </div>
-        <p>&copy; 2024 Cytzero. All rights reserved.</p>
+        <p>&copy; 2025 Cytzero. All rights reserved.</p>
     </footer>
 </body>
 </html>
