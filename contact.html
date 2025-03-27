@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data: https:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://discord.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#000000">
+    <title>Contact - Operation Blackout 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    <div class="year-badge">2025</div>
+
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shield-alt"></i>
+                Operation Blackout
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="header-content">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our security experts</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <p>Romania</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Phone</h3>
+                    <p>None</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>None</p>
+                </div>
+            </div>
+            <div class="contact-form-container">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="discord">Discord Username (Optional)</label>
+                        <input type="text" id="discord" name="discord" placeholder="username#0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Interest</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="protection">Advanced Protection</option>
+                            <option value="systems">Secure Systems</option>
+                            <option value="team">Expert Team</option>
+                            <option value="hacking">Offensive Hacking</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button primary">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.querySelector('.contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                discord: document.getElementById('discord').value,
+                service: document.getElementById('service').value,
+                message: document.getElementById('message').value
+            };
+
+            const webhookUrl = 'https://discord.com/api/webhooks/1354512839129301366/sbMp82M7nuYhp0Qy4DR2mBSjJQtJGAuDzR5qUXefp-GWbx7q6jve5SFrywuSxlqV7ArD';
+
+            const embedMessage = {
+                embeds: [{
+                    title: '📬 New Contact Form Submission',
+                    color: 0x00ff00,
+                    description: 'A new message has been received from the contact form.',
+                    fields: [
+                        {
+                            name: '👤 Name',
+                            value: formData.name,
+                            inline: false
+                        },
+                        {
+                            name: '📧 Email',
+                            value: formData.email,
+                            inline: false
+                        },
+                        {
+                            name: '🏢 Company',
+                            value: formData.company || 'Not provided',
+                            inline: false
+                        },
+                        {
+                            name: '🎮 Discord',
+                            value: formData.discord || 'Not provided',
+                            inline: false
+                        },
+                        {
+                            name: '🎯 Service Interest',
+                            value: formData.service,
+                            inline: false
+                        },
+                        {
+                            name: '💬 Message',
+                            value: formData.message,
+                            inline: false
+                        }
+                    ],
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: 'Operation Blackout Contact Form'
+                    }
+                }]
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(embedMessage)
+                });
+
+                if (response.ok) {
+                    alert('Message sent successfully! We will contact you further.');
+                    this.reset();
+                } else {
+                    throw new Error('Failed to send message');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to send message. Please try again.');
+            }
+        });
+    </script>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Need Immediate Assistance?</h2>
+            <p>Our security experts are available 24/7 to help protect your digital assets</p>
+            <div class="cta-buttons">
+                <a href="tel:+15551234567" class="cta-button primary">
+                    <i class="fas fa-phone"></i> Call Now
+                </a>
+                <a href="https://discord.gg/mz5jkgJ6" target="_blank" class="cta-button secondary">
+                    <i class="fab fa-discord"></i> Join Discord
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="glass-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Operation Blackout</h4>
+                <p>Next-Gen Security Solutions</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="https://discord.gg/mz5jkgJ6" target="_blank" class="social-link">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Operation Blackout. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 
